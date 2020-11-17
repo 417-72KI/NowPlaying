@@ -16,3 +16,9 @@ public struct Track {
     public var fileURL: URL
     public var artwork: NSImage
 }
+
+extension Track {
+    init?(track: MusicTrack) {
+        return nil
+    }
+}

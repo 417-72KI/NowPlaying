@@ -20,6 +20,8 @@
 		B9F9F85C2564221F0077795E /* MusicApp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B9F9F8542564221F0077795E /* MusicApp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B9F9F8652564223D0077795E /* MusicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F9F8642564223D0077795E /* MusicApp.swift */; };
 		B9F9F86A256424B40077795E /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F9F869256424B40077795E /* Track.swift */; };
+		B9F9F8B9256446270077795E /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F9F8B7256446270077795E /* Music.swift */; };
+		B9F9F8BA256446270077795E /* MusicScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F9F8B8256446270077795E /* MusicScripting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,8 @@
 		B9F9F8572564221F0077795E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9F9F8642564223D0077795E /* MusicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicApp.swift; sourceTree = "<group>"; };
 		B9F9F869256424B40077795E /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		B9F9F8B7256446270077795E /* Music.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
+		B9F9F8B8256446270077795E /* MusicScripting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicScripting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,8 +190,18 @@
 				B9F9F8572564221F0077795E /* Info.plist */,
 				B9F9F8642564223D0077795E /* MusicApp.swift */,
 				B9F9F869256424B40077795E /* Track.swift */,
+				B9F9F89125642DD30077795E /* BridgingHeader */,
 			);
 			path = MusicApp;
+			sourceTree = "<group>";
+		};
+		B9F9F89125642DD30077795E /* BridgingHeader */ = {
+			isa = PBXGroup;
+			children = (
+				B9F9F8B7256446270077795E /* Music.swift */,
+				B9F9F8B8256446270077795E /* MusicScripting.swift */,
+			);
+			path = BridgingHeader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -391,6 +405,8 @@
 			files = (
 				B9F9F8652564223D0077795E /* MusicApp.swift in Sources */,
 				B9F9F86A256424B40077795E /* Track.swift in Sources */,
+				B9F9F8B9256446270077795E /* Music.swift in Sources */,
+				B9F9F8BA256446270077795E /* MusicScripting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,6 +694,7 @@
 		B9F9F85E2564221F0077795E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -707,6 +724,7 @@
 		B9F9F85F2564221F0077795E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
