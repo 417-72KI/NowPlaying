@@ -19,10 +19,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var sleepObserver: NSObjectProtocol?
     private var wakeObserver: NSObjectProtocol?
 
+    private lazy var musicDataStore: MusicDataStore = MusicDataStoreImpl()
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         setupNotifications()
 
         statusItem.menu = menu
+        musicDataStore.getCurrentMusicData()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
