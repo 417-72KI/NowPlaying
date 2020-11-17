@@ -11,29 +11,43 @@ import SwiftUI
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    var window: NSWindow!
+    @IBOutlet private weak var menu: NSMenu!
 
+    private let statusItem = NSStatusBar.system
+        .statusItem(withLength: NSStatusItem.variableLength)
+
+    private var sleepObserver: NSObjectProtocol?
+    private var wakeObserver: NSObjectProtocol?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
+        setupNotifications()
 
-        // Create the window and set the content view.
-        window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
-            styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
-            backing: .buffered, defer: false)
-        window.isReleasedWhenClosed = false
-        window.center()
-        window.setFrameAutosaveName("Main Window")
-        window.contentView = NSHostingView(rootView: contentView)
-        window.makeKeyAndOrderFront(nil)
+        statusItem.menu = menu
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+        tearDownNotifications()
     }
-
-
 }
 
+private extension AppDelegate {
+    func setupNotifications() {
+        let notificationCenter = NSWorkspace.shared.notificationCenter
+        sleepObserver = notificationCenter.addObserver(forName: NSWorkspace.willSleepNotification,
+                                                       object: nil,
+                                                       queue: nil) { _ in }
+        wakeObserver = notificationCenter.addObserver(forName: NSWorkspace.didWakeNotification,
+                                                      object: nil,
+                                                      queue: nil) { _ in }
+    }
+
+    func tearDownNotifications() {
+        let notificationCenter = NSWorkspace.shared.notificationCenter
+        if let sleepObserver = sleepObserver {
+            notificationCenter.removeObserver(sleepObserver)
+        }
+        if let wakeObserver = wakeObserver {
+            notificationCenter.removeObserver(wakeObserver)
+        }
+    }
+}
