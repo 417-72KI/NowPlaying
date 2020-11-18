@@ -33,7 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             .handleEvents(receiveOutput: { print($0.title ?? "") })
             .sink { [statusItem] in
                 statusItem.button?.image = $0.artwork.first?
-                    .resize(height: 20)
+                    .resize(height: 18)
             }
             .store(in: &cancellables)
     }
@@ -48,10 +48,10 @@ private extension AppDelegate {
         let notificationCenter = NSWorkspace.shared.notificationCenter
         sleepObserver = notificationCenter.addObserver(forName: NSWorkspace.willSleepNotification,
                                                        object: nil,
-                                                       queue: nil) { _ in }
+                                                       queue: nil) { _ in print("willSleep") }
         wakeObserver = notificationCenter.addObserver(forName: NSWorkspace.didWakeNotification,
                                                       object: nil,
-                                                      queue: nil) { _ in }
+                                                      queue: nil) { _ in print("didWake") }
     }
 
     func tearDownNotifications() {
