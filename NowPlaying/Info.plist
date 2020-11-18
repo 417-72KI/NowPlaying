@@ -28,5 +28,7 @@
 	<string>NSApplication</string>
 	<key>NSAppleEventsUsageDescription</key>
 	<string>再生中のトラックのアートワークをツールバーに表示します</string>
+	<key>LSUIElement</key>
+	<true/>
 </dict>
 </plist>
