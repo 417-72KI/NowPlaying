@@ -7,13 +7,15 @@
 
 import Foundation
 import ScriptingBridge
+import Combine
 
 public final class MusicApp {
     let app: MusicApplication
 
+    private let currentTrackSubject: CurrentValueSubject<Track?, Never> = .init(nil)
+
     public init() {
         app = SBApplication(bundleIdentifier: "com.apple.Music")!
-        app.activate()
         DistributedNotificationCenter.default()
             .addObserver(self,
                          selector: #selector(playerInfoNotification(_:)),
@@ -29,10 +31,17 @@ public final class MusicApp {
     }
 }
 
+public extension MusicApp {
+    var currentTrack: AnyPublisher<Track?, Never> {
+        currentTrackSubject.eraseToAnyPublisher()
+    }
+}
+
 private extension MusicApp {
     func fetchCurrentTrack() {
+        guard app.isRunning else { return }
         if let currentTrack = app.currentTrack.flatMap(Track.init) {
-            print(currentTrack)
+            currentTrackSubject.send(currentTrack)
         }
     }
 }

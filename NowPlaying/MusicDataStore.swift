@@ -7,9 +7,10 @@
 
 import Foundation
 import MusicApp
+import Combine
 
 protocol MusicDataStore {
-    func getCurrentMusicData()
+    var currentTrack: AnyPublisher<Track?, Never> { get }
 }
 
 final class MusicDataStoreImpl {
@@ -17,7 +18,7 @@ final class MusicDataStoreImpl {
 }
 
 extension MusicDataStoreImpl: MusicDataStore {
-    func getCurrentMusicData() {
-
+    var currentTrack: AnyPublisher<Track?, Never> {
+        musicApp.currentTrack
     }
 }

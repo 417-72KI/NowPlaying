@@ -7,6 +7,7 @@
 
 import Cocoa
 import SwiftUI
+import Combine
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -21,11 +22,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private lazy var musicDataStore: MusicDataStore = MusicDataStoreImpl()
 
+    private var cancellables: Set<AnyCancellable> = []
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         setupNotifications()
 
         statusItem.menu = menu
-        musicDataStore.getCurrentMusicData()
+        musicDataStore.currentTrack
+            .compactMap { $0 }
+            .handleEvents(receiveOutput: { print($0.title ?? "") })
+            .sink { _ in }
+            .store(in: &cancellables)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
