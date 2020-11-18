@@ -2,7 +2,7 @@ import AppKit
 import ScriptingBridge
 
 @objc public protocol SBObjectProtocol: NSObjectProtocol {
-    func get() -> Any!
+    func get() -> Any?
 }
 
 @objc public protocol SBApplicationProtocol: SBObjectProtocol {

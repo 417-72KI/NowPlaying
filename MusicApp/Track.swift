@@ -33,7 +33,24 @@ extension Track {
             self.fileURL = (track as? MusicFileTrack)?.location
         }
         self.artwork = track.artworks?().compactMap { $0 as? MusicArtwork }
-            .compactMap(\.data) ?? []
+            .compactMap(\.image) ?? []
         self.bitRate = track.bitRate ?? 0
+    }
+}
+
+private extension MusicArtwork {
+    var image: NSImage? {
+        // `data` にはNSImageが入っているはずだがPNGだとなぜか `NSAppleEventDescriptor` が返ってくる謎仕様
+        // https://stackoverflow.com/questions/7035350/get-itunes-artwork-for-current-song-with-scriptingbridge
+        // https://genjiapp.com/blog/2015/02/13/developed-itunes-rating-widget.html
+        guard let obj = rawData as? SBObjectProtocol else { return nil }
+        switch obj.get() {
+        case let image as NSImage:
+            return image
+        case let descriptor as NSAppleEventDescriptor:
+            return NSImage(data: descriptor.data)
+        default:
+            return nil
+        }
     }
 }
