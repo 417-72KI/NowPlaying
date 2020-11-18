@@ -23,6 +23,8 @@
 		B9F9F8B9256446270077795E /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F9F8B7256446270077795E /* Music.swift */; };
 		B9F9F8BA256446270077795E /* MusicScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F9F8B8256446270077795E /* MusicScripting.swift */; };
 		B9F9F8C2256586210077795E /* NSImage+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F9F8C1256586210077795E /* NSImage+Util.swift */; };
+		B9F9F8CC2565A4610077795E /* Publisher+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F9F8CB2565A4610077795E /* Publisher+String.swift */; };
+		B9F9F8D12565A5990077795E /* Publisher+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F9F8D02565A5990077795E /* Publisher+Optional.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,8 @@
 		B9F9F8B7256446270077795E /* Music.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		B9F9F8B8256446270077795E /* MusicScripting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicScripting.swift; sourceTree = "<group>"; };
 		B9F9F8C1256586210077795E /* NSImage+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Util.swift"; sourceTree = "<group>"; };
+		B9F9F8CB2565A4610077795E /* Publisher+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+String.swift"; sourceTree = "<group>"; };
+		B9F9F8D02565A5990077795E /* Publisher+Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Optional.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +155,8 @@
 				B9F9F83C25640DBE0077795E /* MusicDataStore.swift */,
 				B9F9F7FF256407F10077795E /* ContentView.swift */,
 				B9F9F8C1256586210077795E /* NSImage+Util.swift */,
+				B9F9F8CB2565A4610077795E /* Publisher+String.swift */,
+				B9F9F8D02565A5990077795E /* Publisher+Optional.swift */,
 				B9F9F801256407F20077795E /* Assets.xcassets */,
 				B9F9F806256407F20077795E /* Main.storyboard */,
 				B9F9F809256407F20077795E /* Info.plist */,
@@ -380,7 +386,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9F9F8D12565A5990077795E /* Publisher+Optional.swift in Sources */,
 				B9F9F800256407F10077795E /* ContentView.swift in Sources */,
+				B9F9F8CC2565A4610077795E /* Publisher+String.swift in Sources */,
 				B9F9F7FE256407F10077795E /* AppDelegate.swift in Sources */,
 				B9F9F8C2256586210077795E /* NSImage+Util.swift in Sources */,
 				B9F9F83D25640DBE0077795E /* MusicDataStore.swift in Sources */,

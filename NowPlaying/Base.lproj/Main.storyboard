@@ -40,19 +40,37 @@
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="NowPlaying" customModuleProvider="target">
                     <connections>
+                        <outlet property="albumMenuItem" destination="hdA-F2-D5S" id="5su-mw-Kbx"/>
+                        <outlet property="artistMenuItem" destination="Hmc-Nt-Rfe" id="Hte-ER-OC3"/>
+                        <outlet property="artworkMenuItem" destination="xc0-LI-jKw" id="YBR-DU-5UF"/>
                         <outlet property="menu" destination="5UY-OG-IdY" id="7yF-UF-PK3"/>
+                        <outlet property="titleMenuItem" destination="M5I-wd-kt6" id="4Jy-7c-6Ci"/>
                     </connections>
                 </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <menu id="5UY-OG-IdY">
                     <items>
-                        <menuItem title="Item 1" id="RGk-Ex-BSG">
+                        <menuItem title="再生中の曲" id="LiG-Jk-cku">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <menu key="submenu" title="再生中の曲" id="ep5-ph-FRc">
+                                <items>
+                                    <menuItem id="xc0-LI-jKw">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                    <menuItem title="Title" id="M5I-wd-kt6">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                    <menuItem title="Artist" id="Hmc-Nt-Rfe">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                    <menuItem title="Album" id="hdA-F2-D5S">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                </items>
+                            </menu>
                         </menuItem>
-                        <menuItem title="Item 2" id="jVY-Qs-Gkn">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                        </menuItem>
-                        <menuItem title="Item 3" id="9aY-vM-Hwg">
+                        <menuItem isSeparatorItem="YES" id="QER-mT-YE6"/>
+                        <menuItem title="終了" id="9aY-vM-Hwg">
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                     </items>
