@@ -31,7 +31,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         musicDataStore.currentTrack
             .compactMap { $0 }
             .handleEvents(receiveOutput: { print($0.title ?? "") })
-            .sink { _ in }
+            .sink { [statusItem] in
+                statusItem.button?.image = $0.artwork.first?
+                    .resize(height: 20)
+            }
             .store(in: &cancellables)
     }
 
