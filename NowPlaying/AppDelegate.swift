@@ -53,15 +53,15 @@ private extension AppDelegate {
             .assign(to: \.image, on: artworkMenuItem)
             .store(in: &cancellables)
 
-        currentTrack.map(\.title).orEmpty
+        currentTrack.map(\.title)
             .assign(to: \.title, on: titleMenuItem)
             .store(in: &cancellables)
 
-        currentTrack.map(\.artist).orEmpty
+        currentTrack.map(\.artist)
             .assign(to: \.title, on: artistMenuItem)
             .store(in: &cancellables)
 
-        currentTrack.map(\.album).orEmpty
+        currentTrack.map(\.album)
             .assign(to: \.title, on: albumMenuItem)
             .store(in: &cancellables)
     }
