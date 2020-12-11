@@ -51,7 +51,7 @@ private extension MusicApp {
     @objc func playerInfoNotification(_ notification: NSNotification) {
         guard let userInfo = notification.userInfo,
               let persistentID = (userInfo["PersistentID"] as? Int)
-                .flatMap({ String(format: "%08lX", UInt(bitPattern: $0)) }) else { return }
+                .flatMap({ String(format: "%08lX", UInt(bitPattern: $0)) }) else { return currentTrackSubject.send(nil) }
         print(persistentID)
         fetchCurrentTrack()
     }
