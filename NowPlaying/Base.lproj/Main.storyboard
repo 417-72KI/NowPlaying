@@ -44,6 +44,7 @@
                         <outlet property="artistMenuItem" destination="Hmc-Nt-Rfe" id="Hte-ER-OC3"/>
                         <outlet property="artworkMenuItem" destination="xc0-LI-jKw" id="YBR-DU-5UF"/>
                         <outlet property="menu" destination="5UY-OG-IdY" id="7yF-UF-PK3"/>
+                        <outlet property="playPauseItem" destination="sK0-m0-AZk" id="D7S-Iz-rDW"/>
                         <outlet property="titleMenuItem" destination="M5I-wd-kt6" id="4Jy-7c-6Ci"/>
                     </connections>
                 </customObject>
@@ -73,6 +74,12 @@
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="62r-ka-tEL"/>
+                        <menuItem title="再生" id="sK0-m0-AZk">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="playPause:" target="Voe-Tx-rLC" id="HKd-mK-SOE"/>
+                            </connections>
+                        </menuItem>
                         <menuItem title="前の曲" id="1Uv-z5-Pzi">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>

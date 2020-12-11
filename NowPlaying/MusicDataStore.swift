@@ -11,6 +11,11 @@ import Combine
 
 protocol MusicDataStore {
     var currentTrack: AnyPublisher<Track?, Never> { get }
+    var isPlaying: AnyPublisher<Bool, Never> { get }
+
+    func playPause()
+    func nextTrack()
+    func previousTrack()
 }
 
 final class MusicDataStoreImpl {
@@ -20,5 +25,21 @@ final class MusicDataStoreImpl {
 extension MusicDataStoreImpl: MusicDataStore {
     var currentTrack: AnyPublisher<Track?, Never> {
         musicApp.currentTrack
+    }
+
+    var isPlaying: AnyPublisher<Bool, Never> {
+        musicApp.isPlaying
+    }
+
+    func playPause() {
+        musicApp.playPause()
+    }
+
+    func nextTrack() {
+        musicApp.nextTrack()
+    }
+
+    func previousTrack() {
+        musicApp.previousTrack()
     }
 }

@@ -13,6 +13,7 @@ public final class MusicApp {
     let app: MusicApplication
 
     private let currentTrackSubject: CurrentValueSubject<Track?, Never> = .init(nil)
+    private let isPlayingSubject: CurrentValueSubject<Bool, Never> = .init(false)
 
     public init() {
         app = SBApplication(bundleIdentifier: "com.apple.Music")!
@@ -35,6 +36,24 @@ public extension MusicApp {
     var currentTrack: AnyPublisher<Track?, Never> {
         currentTrackSubject.eraseToAnyPublisher()
     }
+
+    var isPlaying: AnyPublisher<Bool, Never> {
+        isPlayingSubject.eraseToAnyPublisher()
+    }
+}
+
+public extension MusicApp {
+    func playPause() {
+        app.playpause?()
+    }
+
+    func nextTrack() {
+        app.nextTrack?()
+    }
+
+    func previousTrack() {
+        app.previousTrack?()
+    }
 }
 
 private extension MusicApp {
@@ -42,6 +61,14 @@ private extension MusicApp {
         guard app.isRunning else { return }
         if let currentTrack = app.currentTrack.flatMap(Track.init) {
             currentTrackSubject.send(currentTrack)
+        }
+        if let playerState = app.playerState {
+            switch playerState {
+            case .playing, .fastForwarding, .rewinding:
+                isPlayingSubject.send(true)
+            case .paused, .stopped:
+                isPlayingSubject.send(false)
+            }
         }
     }
 }

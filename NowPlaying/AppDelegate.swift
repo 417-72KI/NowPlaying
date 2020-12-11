@@ -19,6 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet private weak var artistMenuItem: NSMenuItem!
     @IBOutlet private weak var albumMenuItem: NSMenuItem!
 
+    @IBOutlet private weak var playPauseItem: NSMenuItem!
 
     private let statusItem = NSStatusBar.system
         .statusItem(withLength: NSStatusItem.variableLength)
@@ -44,6 +45,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 private extension AppDelegate {
     func bind() {
+        musicDataStore.isPlaying.map { $0 ? "一時停止": "再生" }
+            .assign(to: \.title, on: playPauseItem)
+            .store(in: &cancellables)
+
         let currentTrack = musicDataStore.currentTrack
             .wrapped
 
@@ -102,12 +107,16 @@ private extension AppDelegate {
             .store(in: &cancellables)
     }
 
+    @IBAction func playPause(_ sender: NSMenuItem) {
+        musicDataStore.playPause()
+    }
+
     @IBAction func previousTrack(_ sender: NSMenuItem) {
-        
+        musicDataStore.previousTrack()
     }
 
     @IBAction func nextTrack(_ sender: NSMenuItem) {
-
+        musicDataStore.nextTrack()
     }
 
     @IBAction func quit(_ sender: NSMenuItem) {
