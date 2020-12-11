@@ -132,6 +132,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B9F2CF592583F4E600D1D1AD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B9F9F8C1256586210077795E /* NSImage+Util.swift */,
+				B9F9F8CB2565A4610077795E /* Publisher+String.swift */,
+				B9F9F8D02565A5990077795E /* Publisher+Optional.swift */,
+				B9F2CF542583EE3500D1D1AD /* NSLayoutConstraint.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B9F2CF5D2583F4EF00D1D1AD /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				B9F2CF4F2583EC6500D1D1AD /* Applicable.swift */,
+				B9F2CF612583F50700D1D1AD /* Components */,
+				B9F2CF592583F4E600D1D1AD /* Extensions */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		B9F2CF612583F50700D1D1AD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B9F2CF4A2583E96100D1D1AD /* UnselectableMenuItem.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		B9F9F7F1256407F10077795E = {
 			isa = PBXGroup;
 			children = (
@@ -160,12 +189,7 @@
 				B9F9F7FD256407F10077795E /* AppDelegate.swift */,
 				B9F9F83C25640DBE0077795E /* MusicDataStore.swift */,
 				B9F9F7FF256407F10077795E /* ContentView.swift */,
-				B9F9F8C1256586210077795E /* NSImage+Util.swift */,
-				B9F9F8CB2565A4610077795E /* Publisher+String.swift */,
-				B9F9F8D02565A5990077795E /* Publisher+Optional.swift */,
-				B9F2CF4A2583E96100D1D1AD /* UnselectableMenuItem.swift */,
-				B9F2CF542583EE3500D1D1AD /* NSLayoutConstraint.swift */,
-				B9F2CF4F2583EC6500D1D1AD /* Applicable.swift */,
+				B9F2CF5D2583F4EF00D1D1AD /* Util */,
 				B9F9F801256407F20077795E /* Assets.xcassets */,
 				B9F9F806256407F20077795E /* Main.storyboard */,
 				B9F9F809256407F20077795E /* Info.plist */,
