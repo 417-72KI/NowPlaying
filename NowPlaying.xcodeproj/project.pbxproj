@@ -10,6 +10,8 @@
 		B9F2CF4B2583E96100D1D1AD /* UnselectableMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F2CF4A2583E96100D1D1AD /* UnselectableMenuItem.swift */; };
 		B9F2CF502583EC6500D1D1AD /* Applicable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F2CF4F2583EC6500D1D1AD /* Applicable.swift */; };
 		B9F2CF552583EE3500D1D1AD /* NSLayoutConstraint+KeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F2CF542583EE3500D1D1AD /* NSLayoutConstraint+KeyPath.swift */; };
+		B9F2CF692583F9CA00D1D1AD /* Publisher+Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F2CF682583F9CA00D1D1AD /* Publisher+Future.swift */; };
+		B9F2CF712583FB5F00D1D1AD /* NSImage+NSPasteboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F2CF702583FB5F00D1D1AD /* NSImage+NSPasteboard.swift */; };
 		B9F9F7FE256407F10077795E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F9F7FD256407F10077795E /* AppDelegate.swift */; };
 		B9F9F800256407F10077795E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F9F7FF256407F10077795E /* ContentView.swift */; };
 		B9F9F802256407F20077795E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9F9F801256407F20077795E /* Assets.xcassets */; };
@@ -72,6 +74,8 @@
 		B9F2CF4A2583E96100D1D1AD /* UnselectableMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnselectableMenuItem.swift; sourceTree = "<group>"; };
 		B9F2CF4F2583EC6500D1D1AD /* Applicable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Applicable.swift; sourceTree = "<group>"; };
 		B9F2CF542583EE3500D1D1AD /* NSLayoutConstraint+KeyPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+KeyPath.swift"; sourceTree = "<group>"; };
+		B9F2CF682583F9CA00D1D1AD /* Publisher+Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Future.swift"; sourceTree = "<group>"; };
+		B9F2CF702583FB5F00D1D1AD /* NSImage+NSPasteboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+NSPasteboard.swift"; sourceTree = "<group>"; };
 		B9F9F7FA256407F10077795E /* NowPlaying.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NowPlaying.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9F9F7FD256407F10077795E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9F9F7FF256407F10077795E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -136,9 +140,11 @@
 			isa = PBXGroup;
 			children = (
 				B9F9F8C1256586210077795E /* NSImage+Util.swift */,
+				B9F2CF702583FB5F00D1D1AD /* NSImage+NSPasteboard.swift */,
 				B9F9F8CB2565A4610077795E /* Publisher+String.swift */,
 				B9F9F8D02565A5990077795E /* Publisher+Optional.swift */,
 				B9F2CF542583EE3500D1D1AD /* NSLayoutConstraint+KeyPath.swift */,
+				B9F2CF682583F9CA00D1D1AD /* Publisher+Future.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -421,9 +427,11 @@
 			files = (
 				B9F2CF502583EC6500D1D1AD /* Applicable.swift in Sources */,
 				B9F9F8D12565A5990077795E /* Publisher+Optional.swift in Sources */,
+				B9F2CF712583FB5F00D1D1AD /* NSImage+NSPasteboard.swift in Sources */,
 				B9F2CF4B2583E96100D1D1AD /* UnselectableMenuItem.swift in Sources */,
 				B9F9F800256407F10077795E /* ContentView.swift in Sources */,
 				B9F2CF552583EE3500D1D1AD /* NSLayoutConstraint+KeyPath.swift in Sources */,
+				B9F2CF692583F9CA00D1D1AD /* Publisher+Future.swift in Sources */,
 				B9F9F8CC2565A4610077795E /* Publisher+String.swift in Sources */,
 				B9F9F7FE256407F10077795E /* AppDelegate.swift in Sources */,
 				B9F9F8C2256586210077795E /* NSImage+Util.swift in Sources */,

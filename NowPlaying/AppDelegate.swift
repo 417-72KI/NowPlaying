@@ -91,7 +91,26 @@ private extension AppDelegate {
 
 // MARK: -
 private extension AppDelegate {
-    @IBAction func quit(_ sender: Any) {
+    @IBAction func copyArtwork(_ sender: NSMenuItem) {
+        musicDataStore.currentTrack.prefix(1)
+            .asFuture()
+            .sink {
+                guard let track = $0,
+                      let artwork = track.artwork.first else { return }
+                artwork.copy(to: .general)
+            }
+            .store(in: &cancellables)
+    }
+
+    @IBAction func previousTrack(_ sender: NSMenuItem) {
+        
+    }
+
+    @IBAction func nextTrack(_ sender: NSMenuItem) {
+
+    }
+
+    @IBAction func quit(_ sender: NSMenuItem) {
         exit(0)
     }
 }

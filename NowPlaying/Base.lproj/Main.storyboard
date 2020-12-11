@@ -66,6 +66,26 @@
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="QER-mT-YE6"/>
+                        <menuItem title="アートワークをコピー" id="Nge-xD-1yY">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="copyArtwork:" target="Voe-Tx-rLC" id="Hpf-On-fYP"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="62r-ka-tEL"/>
+                        <menuItem title="前の曲" id="1Uv-z5-Pzi">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="previousTrack:" target="Voe-Tx-rLC" id="iz5-CH-feK"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="次の曲" id="Z5G-6E-IiG">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="nextTrack:" target="Voe-Tx-rLC" id="SXk-D4-qZI"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="rMb-kJ-dkG"/>
                         <menuItem title="終了" id="9aY-vM-Hwg">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
