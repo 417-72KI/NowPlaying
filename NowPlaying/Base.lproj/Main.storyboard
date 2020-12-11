@@ -50,19 +50,19 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <menu id="5UY-OG-IdY">
                     <items>
-                        <menuItem title="再生中の曲" id="LiG-Jk-cku">
+                        <menuItem title="再生中の曲" id="LiG-Jk-cku" customClass="UnselectableMenuItem" customModule="NowPlaying" customModuleProvider="target">
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
-                        <menuItem id="xc0-LI-jKw">
+                        <menuItem id="xc0-LI-jKw" customClass="UnselectableMenuItem" customModule="NowPlaying" customModuleProvider="target">
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
-                        <menuItem title="Title" id="M5I-wd-kt6">
+                        <menuItem title="Title" id="M5I-wd-kt6" customClass="UnselectableMenuItem" customModule="NowPlaying" customModuleProvider="target">
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
-                        <menuItem title="Artist" id="Hmc-Nt-Rfe">
+                        <menuItem title="Artist" id="Hmc-Nt-Rfe" customClass="UnselectableMenuItem" customModule="NowPlaying" customModuleProvider="target">
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
-                        <menuItem title="Album" id="hdA-F2-D5S">
+                        <menuItem title="Album" id="hdA-F2-D5S" customClass="UnselectableMenuItem" customModule="NowPlaying" customModuleProvider="target">
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="QER-mT-YE6"/>
