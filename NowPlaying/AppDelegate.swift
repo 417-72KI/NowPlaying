@@ -88,3 +88,10 @@ private extension AppDelegate {
         }
     }
 }
+
+// MARK: -
+private extension AppDelegate {
+    @IBAction func quit(_ sender: Any) {
+        exit(0)
+    }
+}

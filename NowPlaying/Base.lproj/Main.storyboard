@@ -52,26 +52,25 @@
                     <items>
                         <menuItem title="再生中の曲" id="LiG-Jk-cku">
                             <modifierMask key="keyEquivalentModifierMask"/>
-                            <menu key="submenu" title="再生中の曲" id="ep5-ph-FRc">
-                                <items>
-                                    <menuItem id="xc0-LI-jKw">
-                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                    </menuItem>
-                                    <menuItem title="Title" id="M5I-wd-kt6">
-                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                    </menuItem>
-                                    <menuItem title="Artist" id="Hmc-Nt-Rfe">
-                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                    </menuItem>
-                                    <menuItem title="Album" id="hdA-F2-D5S">
-                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                    </menuItem>
-                                </items>
-                            </menu>
+                        </menuItem>
+                        <menuItem id="xc0-LI-jKw">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Title" id="M5I-wd-kt6">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Artist" id="Hmc-Nt-Rfe">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Album" id="hdA-F2-D5S">
+                            <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="QER-mT-YE6"/>
                         <menuItem title="終了" id="9aY-vM-Hwg">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="quit:" target="Voe-Tx-rLC" id="VLG-dy-LYp"/>
+                            </connections>
                         </menuItem>
                     </items>
                 </menu>
