@@ -181,7 +181,7 @@ import ScriptingBridge
     @objc optional func fastForward() // skip forward in a playing track
     @objc optional func nextTrack() // advance to the next track in the current playlist
     @objc optional func pause() // pause playback
-    @objc optional func playOnce(_ once: Any!) // play the current track or the specified track or file.
+    @objc optional func playOnce(_ once: Bool) // play the current track or the specified track or file.
     @objc optional func playpause() // toggle the playing/paused state of the current track
     @objc optional func previousTrack() // return to the previous track in the current playlist
     @objc optional func resume() // disable fast forward/rewind and resume playback, if playing.
