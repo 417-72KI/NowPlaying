@@ -13,6 +13,16 @@ extension Publisher where Output: OptionalType {
         compactMap(\.value)
             .eraseToAnyPublisher()
     }
+
+    func map<T>(_ keyPath: KeyPath<Self.Output.Wrapped, T>) -> AnyPublisher<T?, Self.Failure> {
+        map { $0.value?[keyPath: keyPath] }
+            .eraseToAnyPublisher()
+    }
+
+    func map<T>(_ keyPath: KeyPath<Self.Output.Wrapped, T>, default defaultValue: T) -> AnyPublisher<T, Self.Failure> {
+        map { $0.value?[keyPath: keyPath] ?? defaultValue }
+            .eraseToAnyPublisher()
+    }
 }
 
 protocol OptionalType {

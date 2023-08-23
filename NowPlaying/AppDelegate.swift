@@ -50,23 +50,22 @@ private extension AppDelegate {
             .store(in: &cancellables)
 
         let currentTrack = musicDataStore.currentTrack
-            .wrapped
 
         currentTrack.map(\.artwork)
-            .map { $0.first?.resize(height: 100) }
+            .map { $0?.first?.resize(height: 100) }
             .handleEvents(receiveOutput: { [statusItem] in statusItem.button?.image = $0?.resize(height: 18) })
             .assign(to: \.image, on: artworkMenuItem)
             .store(in: &cancellables)
 
-        currentTrack.map(\.title)
+        currentTrack.map(\.title, default: "")
             .assign(to: \.title, on: titleMenuItem)
             .store(in: &cancellables)
 
-        currentTrack.map(\.artist)
+        currentTrack.map(\.artist, default: "")
             .assign(to: \.title, on: artistMenuItem)
             .store(in: &cancellables)
 
-        currentTrack.map(\.album)
+        currentTrack.map(\.album, default: "")
             .assign(to: \.title, on: albumMenuItem)
             .store(in: &cancellables)
     }

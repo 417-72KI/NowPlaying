@@ -20,6 +20,13 @@ extension UnselectableMenuItem {
             setContentView(NSTextField(labelWithString: title))
         }
     }
+
+    override var attributedTitle: NSAttributedString? {
+        didSet {
+            setContentView(NSTextField(labelWithAttributedString: attributedTitle ?? .init()))
+        }
+    }
+
     override var image: NSImage? {
         didSet {
             let contentView = NSView().apply {
