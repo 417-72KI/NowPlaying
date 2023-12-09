@@ -16,10 +16,13 @@ protocol MusicDataStore {
     func playPause()
     func nextTrack()
     func previousTrack()
+
+    func restoreArtwork()
 }
 
 final class MusicDataStoreImpl {
     private let musicApp = MusicApp()
+    private var cancellables: Set<AnyCancellable> = []
 }
 
 extension MusicDataStoreImpl: MusicDataStore {
@@ -41,5 +44,9 @@ extension MusicDataStoreImpl: MusicDataStore {
 
     func previousTrack() {
         musicApp.previousTrack()
+    }
+
+    func restoreArtwork() {
+        musicApp.restoreArtworkForCurrentTrack()
     }
 }

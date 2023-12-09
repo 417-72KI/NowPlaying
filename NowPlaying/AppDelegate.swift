@@ -21,6 +21,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet private weak var playPauseItem: NSMenuItem!
 
+    @IBOutlet private weak var restoreArtworkMenuItem: NSMenuItem!
+    @IBOutlet private weak var autoRestoreArtworkMenuItem: NSMenuItem!
+
     private let statusItem = NSStatusBar.system
         .statusItem(withLength: NSStatusItem.variableLength)
 
@@ -35,6 +38,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         setupNotifications()
 
         statusItem.menu = menu
+
+        #if !DEBUG
+        restoreArtworkMenuItem.isHidden = true
+        autoRestoreArtworkMenuItem.isHidden = true
+        #endif
+
         bind()
     }
 
@@ -67,6 +76,15 @@ private extension AppDelegate {
 
         currentTrack.map(\.album, default: "")
             .assign(to: \.title, on: albumMenuItem)
+            .store(in: &cancellables)
+
+        currentTrack.map(\.persistentID, default: "")
+            .removeDuplicates()
+            .sink { [weak self] _ in
+                guard let self,
+                      case .on = autoRestoreArtworkMenuItem.state else { return }
+                musicDataStore.restoreArtwork()
+            }
             .store(in: &cancellables)
     }
 }
@@ -104,6 +122,17 @@ private extension AppDelegate {
                 artwork.copy(to: .general)
             }
             .store(in: &cancellables)
+    }
+
+    @IBAction func restoreArtwork(_ sender: NSMenuItem) {
+        musicDataStore.restoreArtwork()
+    }
+
+    @IBAction func toggleAutoRestoreArtwork(_ sender: NSMenuItem) {
+        autoRestoreArtworkMenuItem.state = switch autoRestoreArtworkMenuItem.state {
+        case .off: .on
+        default: .off
+        }
     }
 
     @IBAction func playPause(_ sender: NSMenuItem) {

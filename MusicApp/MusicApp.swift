@@ -56,6 +56,22 @@ public extension MusicApp {
     }
 }
 
+public extension MusicApp {
+    func restoreArtwork(for track: Track) {
+        guard let tracks = app.tracks?() else { return }
+        guard let track = tracks.lazy
+            .compactMap({ $0 as? MusicTrack })
+            .first(where: { $0.persistentID == track.persistentID }) else { return }
+        restoreArtwork(for: track)
+    }
+
+    func restoreArtworkForCurrentTrack() {
+        guard app.isRunning,
+              let currentTrack = app.currentTrack else { return }
+        restoreArtwork(for: currentTrack)
+    }
+}
+
 private extension MusicApp {
     func fetchCurrentTrack() {
         guard app.isRunning else { return }
@@ -70,6 +86,17 @@ private extension MusicApp {
                 isPlayingSubject.send(false)
             }
         }
+    }
+
+    func restoreArtwork(for track: MusicTrack) {
+        guard let artworks = track.artworks?() else { return }
+        print(artworks.count)
+        artworks.lazy
+            .compactMap { $0 as? MusicArtwork }
+            .forEach { artwork in
+                guard let data = artwork.data else { return }
+                artwork.setData?(data)
+            }
     }
 }
 

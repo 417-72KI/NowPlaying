@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22155"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -43,8 +43,10 @@
                         <outlet property="albumMenuItem" destination="hdA-F2-D5S" id="5su-mw-Kbx"/>
                         <outlet property="artistMenuItem" destination="Hmc-Nt-Rfe" id="Hte-ER-OC3"/>
                         <outlet property="artworkMenuItem" destination="xc0-LI-jKw" id="YBR-DU-5UF"/>
+                        <outlet property="autoRestoreArtworkMenuItem" destination="cBT-n0-580" id="9ry-C8-cz2"/>
                         <outlet property="menu" destination="5UY-OG-IdY" id="7yF-UF-PK3"/>
                         <outlet property="playPauseItem" destination="sK0-m0-AZk" id="D7S-Iz-rDW"/>
+                        <outlet property="restoreArtworkMenuItem" destination="p57-wj-Zic" id="oGE-wp-Yn0"/>
                         <outlet property="titleMenuItem" destination="M5I-wd-kt6" id="4Jy-7c-6Ci"/>
                     </connections>
                 </customObject>
@@ -71,6 +73,18 @@
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="copyArtwork:" target="Voe-Tx-rLC" id="Hpf-On-fYP"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="アートワークを復旧[debug]" id="p57-wj-Zic">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="restoreArtwork:" target="Voe-Tx-rLC" id="A8k-CY-9Xd"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="アートワークを自動で復旧" id="cBT-n0-580">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="toggleAutoRestoreArtwork:" target="Voe-Tx-rLC" id="J81-te-6El"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="62r-ka-tEL"/>
