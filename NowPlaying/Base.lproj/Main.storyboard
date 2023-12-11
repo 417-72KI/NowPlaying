@@ -87,6 +87,31 @@
                                 <action selector="toggleAutoRestoreArtwork:" target="Voe-Tx-rLC" id="J81-te-6El"/>
                             </connections>
                         </menuItem>
+                        <menuItem isSeparatorItem="YES" id="klU-Sd-KIz"/>
+                        <menuItem title="アーティスト(読み)を反映" id="FK3-bw-C5z">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="artistSort:" target="Voe-Tx-rLC" id="T8W-lr-nhw"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="アルバムアーティスト(読み)を反映" id="EwK-sz-qtC">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="albumArtistSort:" target="Voe-Tx-rLC" id="qNh-B0-d5k"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="アルバム(読み)を反映" id="XH3-oW-c6u">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="albumSort:" target="Voe-Tx-rLC" id="VQU-2G-Hi5"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="作曲者(読み)を反映" id="SO6-06-mFL">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="composerSort:" target="Voe-Tx-rLC" id="oDz-Dw-niL"/>
+                            </connections>
+                        </menuItem>
                         <menuItem isSeparatorItem="YES" id="62r-ka-tEL"/>
                         <menuItem title="再生" id="sK0-m0-AZk">
                             <modifierMask key="keyEquivalentModifierMask"/>

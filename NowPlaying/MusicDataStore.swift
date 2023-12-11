@@ -12,16 +12,20 @@ import Combine
 protocol MusicDataStore {
     var currentTrack: AnyPublisher<Track?, Never> { get }
     var isPlaying: AnyPublisher<Bool, Never> { get }
+    var isExecuting: AnyPublisher<Bool, Never> { get }
 
     func playPause()
     func nextTrack()
     func previousTrack()
 
     func restoreArtwork()
+
+    func applySortFromCurrentTrack(forKeyPath keyPath: KeyPath<Track, String>)
 }
 
 final class MusicDataStoreImpl {
     private let musicApp = MusicApp()
+    private let executingSubject = CurrentValueSubject<Bool, Never>(false)
     private var cancellables: Set<AnyCancellable> = []
 }
 
@@ -32,6 +36,10 @@ extension MusicDataStoreImpl: MusicDataStore {
 
     var isPlaying: AnyPublisher<Bool, Never> {
         musicApp.isPlaying
+    }
+
+    var isExecuting: AnyPublisher<Bool, Never> {
+        executingSubject.eraseToAnyPublisher()
     }
 
     func playPause() {
@@ -48,5 +56,19 @@ extension MusicDataStoreImpl: MusicDataStore {
 
     func restoreArtwork() {
         musicApp.restoreArtworkForCurrentTrack()
+    }
+
+    func applySortFromCurrentTrack(forKeyPath keyPath: KeyPath<Track, String>) {
+        Task {
+            executingSubject.send(true)
+            defer { executingSubject.send(false) }
+            switch keyPath {
+            case \.artist: await musicApp.applySortForArtistFromCurrentTrack()
+            case \.album: await musicApp.applySortForAlbumFromCurrentTrack()
+            case \.albumArtist: await musicApp.applySortForAlbumArtistFromCurrentTrack()
+            case \.composer: await musicApp.applySortForComposerFromCurrentTrack()
+            default: fatalError()
+            }
+        }
     }
 }

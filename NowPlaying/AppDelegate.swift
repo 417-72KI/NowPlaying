@@ -111,8 +111,9 @@ private extension AppDelegate {
     }
 }
 
-// MARK: -
+// MARK: - actions
 private extension AppDelegate {
+    // MARK: Artworks
     @IBAction func copyArtwork(_ sender: NSMenuItem) {
         musicDataStore.currentTrack.prefix(1)
             .asFuture()
@@ -134,7 +135,24 @@ private extension AppDelegate {
         default: .off
         }
     }
+    // MARK: Sort
+    @IBAction func artistSort(_ sender: NSMenuItem) {
+        musicDataStore.applySortFromCurrentTrack(forKeyPath: \.artist)
+    }
+    
+    @IBAction func albumArtistSort(_ sender: NSMenuItem) {
+        musicDataStore.applySortFromCurrentTrack(forKeyPath: \.albumArtist)
+    }
 
+    @IBAction func albumSort(_ sender: NSMenuItem) {
+        musicDataStore.applySortFromCurrentTrack(forKeyPath: \.album)
+    }
+
+    @IBAction func composerSort(_ sender: NSMenuItem) {
+        musicDataStore.applySortFromCurrentTrack(forKeyPath: \.composer)
+    }
+
+    // MARK: Player
     @IBAction func playPause(_ sender: NSMenuItem) {
         musicDataStore.playPause()
     }
