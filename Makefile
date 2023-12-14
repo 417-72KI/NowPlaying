@@ -1,4 +1,5 @@
 .SILENT:
+.PHONY: build run
 
 PRODUCT_NAME := NowPlaying
 
