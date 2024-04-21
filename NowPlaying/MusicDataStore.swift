@@ -24,6 +24,7 @@ protocol MusicDataStore {
     func restoreURLForAlbum()
 
     func applySortFromCurrentTrack(forKeyPath keyPath: KeyPath<Track, String>)
+    func guessSortInCurrentTrack(forKeyPath keyPath: KeyPath<Track, String>)
 
     func autoSortForCurrentTrack()
 }
@@ -83,6 +84,9 @@ extension MusicDataStoreImpl: MusicDataStore {
             default: fatalError()
             }
         }
+    }
+
+    func guessSortInCurrentTrack(forKeyPath keyPath: KeyPath<Track, String>) {
     }
 
     func autoSortForCurrentTrack() {

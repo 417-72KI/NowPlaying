@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22690"/>
     </dependencies>
     <scenes>
@@ -108,10 +107,22 @@
                                 <action selector="artistSort:" target="Voe-Tx-rLC" id="T8W-lr-nhw"/>
                             </connections>
                         </menuItem>
+                        <menuItem title="アーティスト(読み)を推測" id="Ceo-9i-EBW">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="guessArtistSort:" target="Voe-Tx-rLC" id="ONA-dB-2EP"/>
+                            </connections>
+                        </menuItem>
                         <menuItem title="アルバムアーティスト(読み)を反映" id="EwK-sz-qtC">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="albumArtistSort:" target="Voe-Tx-rLC" id="qNh-B0-d5k"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="アルバムアーティスト(読み)を推測" id="mFj-k5-Gwn">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="guessAlbumArtistSort:" target="Voe-Tx-rLC" id="T57-xR-ntx"/>
                             </connections>
                         </menuItem>
                         <menuItem title="アルバム(読み)を反映" id="XH3-oW-c6u">
@@ -120,10 +131,22 @@
                                 <action selector="albumSort:" target="Voe-Tx-rLC" id="VQU-2G-Hi5"/>
                             </connections>
                         </menuItem>
+                        <menuItem title="アルバム(読み)を推測" id="8Mb-XI-Lle">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="guestAlbumSort:" target="Voe-Tx-rLC" id="HzE-bv-awc"/>
+                            </connections>
+                        </menuItem>
                         <menuItem title="作曲者(読み)を反映" id="SO6-06-mFL">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="composerSort:" target="Voe-Tx-rLC" id="oDz-Dw-niL"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="作曲者(読み)を推測" id="XRr-lH-3xt">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="guessComposerSort:" target="Voe-Tx-rLC" id="hTc-tN-jTQ"/>
                             </connections>
                         </menuItem>
                         <menuItem title="読みを自動反映" id="gLG-Ca-Bwu">

@@ -160,16 +160,32 @@ private extension AppDelegate {
         musicDataStore.applySortFromCurrentTrack(forKeyPath: \.artist)
     }
 
+    @IBAction func guessArtistSort(_ sender: NSMenuItem) {
+        musicDataStore.guessSortInCurrentTrack(forKeyPath: \.artist)
+    }
+
     @IBAction func albumArtistSort(_ sender: NSMenuItem) {
         musicDataStore.applySortFromCurrentTrack(forKeyPath: \.albumArtist)
+    }
+
+    @IBAction func guessAlbumArtistSort(_ sender: NSMenuItem) {
+        musicDataStore.guessSortInCurrentTrack(forKeyPath: \.albumArtist)
     }
 
     @IBAction func albumSort(_ sender: NSMenuItem) {
         musicDataStore.applySortFromCurrentTrack(forKeyPath: \.album)
     }
 
+    @IBAction func guestAlbumSort(_ sender: NSMenuItem) {
+        musicDataStore.guessSortInCurrentTrack(forKeyPath: \.album)
+    }
+
     @IBAction func composerSort(_ sender: NSMenuItem) {
         musicDataStore.applySortFromCurrentTrack(forKeyPath: \.composer)
+    }
+
+    @IBAction func guessComposerSort(_ sender: NSMenuItem) {
+        musicDataStore.guessSortInCurrentTrack(forKeyPath: \.composer)
     }
 
     @IBAction func toggleAutoSortMenu(_ sender: NSMenuItem) {
