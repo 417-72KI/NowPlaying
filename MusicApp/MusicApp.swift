@@ -16,6 +16,8 @@ public final class MusicApp {
     private let currentTrackSubject: CurrentValueSubject<Track?, Never> = .init(nil)
     private let isPlayingSubject: CurrentValueSubject<Bool, Never> = .init(false)
 
+    private let applicationSupportPath = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).first!
+
     public init() {
         app = SBApplication(bundleIdentifier: "com.apple.Music")!
         DistributedNotificationCenter.default()
@@ -290,6 +292,168 @@ extension MusicApp {
     }
 }
 
+public extension MusicApp {
+    func autoSortForCurrentTrack() {
+        guard app.isRunning,
+              let currentTrack = app.currentTrack else { return }
+        autoSortArtist(forTrack: currentTrack)
+        autoSortAlbum(forTrack: currentTrack)
+        autoSortAlbumArtist(forTrack: currentTrack)
+        autoSortComposer(forTrack: currentTrack)
+    }
+}
+
+extension MusicApp {
+    func autoSortArtist(forTrack track: MusicTrack) {
+        guard let artist = track.artist else { return }
+        guard track.sortArtist.isNilOrEmpty else {
+            if String(artist.trimmingPrefix(/^(T|t)(H|h)(E|e)\s/)) == track.sortArtist {
+                print(#file, #line, "\(artist) starts with `THE`. skip")
+                return
+            }
+
+            if sortArtistMap[artist] == nil {
+                sortArtistMap[artist] = track.sortArtist
+            }
+            return
+        }
+        guard let sortArtist = sortArtistMap[artist] else { return }
+        track.setSortArtist?(sortArtist)
+    }
+    func autoSortAlbum(forTrack track: MusicTrack) {
+        guard let album = track.album else { return }
+        guard track.sortAlbum.isNilOrEmpty else {
+            if String(album.trimmingPrefix(/^(T|t)(H|h)(E|e)\s/)) == track.sortAlbum {
+                print(#file, #line, "\(album) starts with `THE`. skip")
+                return
+            }
+
+            if sortAlbumMap[album] == nil {
+                sortAlbumMap[album] = track.sortAlbum
+            }
+            return
+        }
+        guard let sortAlbum = sortAlbumMap[album] else { return }
+        track.setSortAlbum?(sortAlbum)
+    }
+    func autoSortAlbumArtist(forTrack track: MusicTrack) {
+        guard let albumArtist = track.albumArtist else { return }
+        guard track.sortAlbumArtist.isNilOrEmpty else {
+            if String(albumArtist.trimmingPrefix(/^(T|t)(H|h)(E|e)\s/)) == track.sortAlbumArtist {
+                print(#file, #line, "\(albumArtist) starts with `THE`. skip")
+                return
+            }
+
+            if sortAlbumArtistMap[albumArtist] == nil {
+                sortAlbumArtistMap[albumArtist] = track.sortAlbumArtist
+            }
+            return
+        }
+        guard let sortAlbumArtist = sortAlbumArtistMap[albumArtist] else { return }
+        track.setSortAlbumArtist?(sortAlbumArtist)
+    }
+    func autoSortComposer(forTrack track: MusicTrack) {
+        guard let composer = track.composer else { return }
+        guard track.sortComposer.isNilOrEmpty else {
+            if String(composer.trimmingPrefix(/^(T|t)(H|h)(E|e)/)) == track.sortComposer {
+                print(#file, #line, "\(composer) starts with `THE`. skip")
+                return
+            }
+
+            if sortComposerMap[composer] == nil {
+                sortComposerMap[composer] = track.sortComposer
+            }
+            return
+        }
+        guard let sortComposer = sortComposerMap[composer] else { return }
+        track.setSortComposer?(sortComposer)
+    }
+}
+
+private extension MusicApp {
+    var sortArtistMap: [String: String] {
+        get { loadSortMap(fromFile: sortArtistFile) }
+        set {
+            do {
+                try saveSortMap(newValue, to: sortArtistFile)
+            } catch {
+                print(#file, #line, "Failed to save \(sortArtistFile.path)")
+            }
+        }
+    }
+    var sortAlbumMap: [String: String] {
+        get { loadSortMap(fromFile: sortAlbumFile) }
+        set {
+            do {
+                try saveSortMap(newValue, to: sortAlbumFile)
+            } catch {
+                print(#file, #line, "Failed to save \(sortAlbumFile.path)")
+            }
+        }
+    }
+    var sortAlbumArtistMap: [String: String] {
+        get { loadSortMap(fromFile: sortAlbumArtistFile) }
+        set {
+            do {
+                try saveSortMap(newValue, to: sortAlbumArtistFile)
+            } catch {
+                print(#file, #line, "Failed to save \(sortAlbumArtistFile.path)")
+            }
+        }
+    }
+    var sortComposerMap: [String: String] {
+        get { loadSortMap(fromFile: sortComposerFile) }
+        set {
+            do {
+                try saveSortMap(newValue, to: sortComposerFile)
+            } catch {
+                print(#file, #line, "Failed to save \(sortComposerFile.path)")
+            }
+        }
+    }
+}
+
+private extension MusicApp {
+    func loadSortMap(fromFile fileURL: URL) -> [String: String] {
+        (try? plistDecoder.decode([String: String].self, from: Data(contentsOf: fileURL))) ?? [:]
+    }
+
+    func saveSortMap(_ map: [String: String], to fileURL: URL) throws {
+        print(#file, #line, fileURL)
+        let data = try plistEncoder.encode(map)
+        try data.write(to: fileURL)
+    }
+}
+
+private extension MusicApp {
+    var plistDecoder: PropertyListDecoder {
+        PropertyListDecoder()
+    }
+
+    var plistEncoder: PropertyListEncoder {
+        let encoder = PropertyListEncoder()
+        encoder.outputFormat = .binary
+        return encoder
+    }
+
+    var sortArtistFile: URL {
+        URL(fileURLWithPath: applicationSupportPath)
+            .appendingPathComponent("SortArtist.plist")
+    }
+    var sortAlbumFile: URL {
+        URL(fileURLWithPath: applicationSupportPath)
+            .appendingPathComponent("SortAlbum.plist")
+    }
+    var sortAlbumArtistFile: URL {
+        URL(fileURLWithPath: applicationSupportPath)
+            .appendingPathComponent("SortAlbumArtist.plist")
+    }
+    var sortComposerFile: URL {
+        URL(fileURLWithPath: applicationSupportPath)
+            .appendingPathComponent("SortComposer.plist")
+    }
+}
+
 // MARK: - Notification
 private extension MusicApp {
     @objc func playerInfoNotification(_ notification: NSNotification) {
@@ -298,5 +462,15 @@ private extension MusicApp {
                 .flatMap({ String(format: "%08lX", UInt(bitPattern: $0)) }) else { return currentTrackSubject.send(nil) }
         print(persistentID)
         fetchCurrentTrack()
+    }
+}
+
+extension String? {
+    var isNilOrEmpty: Bool {
+        if let self {
+            self.isEmpty
+        } else {
+            true
+        }
     }
 }

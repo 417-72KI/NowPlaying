@@ -24,6 +24,8 @@ protocol MusicDataStore {
     func restoreURLForAlbum()
 
     func applySortFromCurrentTrack(forKeyPath keyPath: KeyPath<Track, String>)
+
+    func autoSortForCurrentTrack()
 }
 
 final class MusicDataStoreImpl {
@@ -81,5 +83,9 @@ extension MusicDataStoreImpl: MusicDataStore {
             default: fatalError()
             }
         }
+    }
+
+    func autoSortForCurrentTrack() {
+        musicApp.autoSortForCurrentTrack()
     }
 }

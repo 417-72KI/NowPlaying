@@ -44,6 +44,7 @@
                         <outlet property="artistMenuItem" destination="Hmc-Nt-Rfe" id="Hte-ER-OC3"/>
                         <outlet property="artworkMenuItem" destination="xc0-LI-jKw" id="YBR-DU-5UF"/>
                         <outlet property="autoRestoreArtworkMenuItem" destination="cBT-n0-580" id="9ry-C8-cz2"/>
+                        <outlet property="autoSortMenuItem" destination="gLG-Ca-Bwu" id="chC-rg-eZl"/>
                         <outlet property="menu" destination="5UY-OG-IdY" id="7yF-UF-PK3"/>
                         <outlet property="playPauseItem" destination="sK0-m0-AZk" id="D7S-Iz-rDW"/>
                         <outlet property="restoreArtworkMenuItem" destination="p57-wj-Zic" id="oGE-wp-Yn0"/>
@@ -123,6 +124,12 @@
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="composerSort:" target="Voe-Tx-rLC" id="oDz-Dw-niL"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="読みを自動反映" id="gLG-Ca-Bwu">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="toggleAutoSortMenu:" target="Voe-Tx-rLC" id="2W7-ky-2RB"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="62r-ka-tEL"/>
