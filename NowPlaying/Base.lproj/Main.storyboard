@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22155"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22690"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -85,6 +85,19 @@
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="toggleAutoRestoreArtwork:" target="Voe-Tx-rLC" id="J81-te-6El"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="lPi-WF-LqT"/>
+                        <menuItem title="URLを復旧[debug]" id="Zce-5j-7KK">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="restoreURL:" target="Voe-Tx-rLC" id="0gF-zh-4cN"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="アルバムのURLを復旧[debug]" id="GyJ-hB-ZZn">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="restoreURLForAlbum:" target="Voe-Tx-rLC" id="QkJ-fA-msY"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="klU-Sd-KIz"/>

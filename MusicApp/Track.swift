@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import class Cocoa.NSImage
+import class AppKit.NSImage
 
 public struct Track {
     public var persistentID: String
