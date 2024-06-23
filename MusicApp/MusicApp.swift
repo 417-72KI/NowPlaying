@@ -184,7 +184,7 @@ private extension MusicApp {
             await MainActor.run {
                 let panel = NSOpenPanel()
                 panel.message = "Find a music file for \(name)"
-                panel.allowedFileTypes = ["mp3"]
+                panel.allowedContentTypes = [.mp3]
                 panel.directoryURL = directory
                 panel.allowsMultipleSelection = false
 
