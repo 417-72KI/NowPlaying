@@ -54,3 +54,20 @@ private extension MusicArtwork {
         }
     }
 }
+
+#if DEBUG
+public extension Track {
+    static var mock: Self {
+        .init(
+            persistentID: "foobar",
+            title: "Some Title",
+            artist: "Some Artist",
+            album: "Some Album",
+            albumArtist: "Some Album Artist",
+            composer: "Some Composer",
+            artwork: [],
+            bitRate: 320
+        )
+    }
+}
+#endif

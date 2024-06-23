@@ -11,15 +11,17 @@ import MusicApp
 @main
 struct NowPlayingApp: App {
     @State private var currentTrack: Track?
-    private let musicDataStore: MusicDataStore = MusicDataStoreImpl()
+    private let musicDataStore = MusicDataStoreImpl()
 
     var body: some Scene {
         MenuBarExtra {
-            MenuView(currentTrack: $currentTrack)
+            MenuView(dataStore: musicDataStore,
+                     currentTrack: $currentTrack)
         } label: {
             Group {
                 if let artwork = currentTrack?.artwork.first?.resize(height: 18) {
                     Image(nsImage: artwork)
+                        .environment(\.displayScale, 2.0)
                 } else {
                     Color.white
                         .frame(width: 18)
@@ -29,5 +31,6 @@ struct NowPlayingApp: App {
                 currentTrack = $0
             }
         }
+        .menuBarExtraStyle(.window)
     }
 }
