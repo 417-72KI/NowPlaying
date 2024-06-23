@@ -8,6 +8,7 @@
 import Foundation
 import ScriptingBridge
 import Combine
+import AppKit
 
 public final class MusicApp {
     let app: MusicApplication
@@ -97,6 +98,102 @@ private extension MusicApp {
                 guard let data = artwork.data else { return }
                 artwork.setData?(data)
             }
+    }
+}
+
+public extension MusicApp {
+    func restoreURL(for track: Track) {
+        guard let tracks = app.tracks?() else { return }
+        guard let track = tracks.lazy
+            .compactMap({ $0 as? MusicTrack })
+            .first(where: { $0.persistentID == track.persistentID }) else { return }
+        restoreURL(for: track)
+    }
+
+    func restoreURLForCurrentTrack() {
+        guard app.isRunning,
+              let currentTrack = app.currentTrack else { return }
+        restoreURL(for: currentTrack)
+    }
+
+    func restoreURLForAlbumByCurrentTrack() async {
+        guard app.isRunning,
+              let currentTrack = app.currentTrack else { return }
+        print(#file, #line, currentTrack.name as Any, currentTrack.albumArtist as Any)
+        guard let tracks = app.tracks?() else {
+            print(#file, #line, "Failed to fetch tracks")
+            return
+        }
+        await Task.detached { [self] in
+            for track in tracks {
+                guard let track = track as? MusicFileTrack else { continue }
+                print(#file, #line, track.name as Any, track.albumArtist as Any)
+                if track.albumArtist == currentTrack.albumArtist,
+                   track.album == currentTrack.album {
+                    await restoreURL(forTrack: track, by: currentTrack)
+                }
+            }
+        }.value
+    }
+}
+
+private extension MusicApp {
+    func restoreURL(for track: MusicTrack) {
+        guard let track = track as? MusicFileTrack else {
+            print("Invalid track: \(track)")
+            return
+        }
+        guard let url = track.location else {
+            print("no location of \(track)(\"\(track.name ?? "\"\"")\")")
+            return
+        }
+        track.setLocation?(url)
+    }
+
+    func restoreURL(forTrack track: MusicFileTrack, by origin: MusicTrack) async {
+        if let location = track.location {
+            print(#file, #line, location)
+            guard location.path.count <= 1 else {
+                return
+            }
+        }
+        guard let origin = origin as? MusicFileTrack else {
+            print("Invalid origin: \(origin)")
+            return
+        }
+        guard let originURL = origin.location else {
+            print("no location of \(origin)(\"\(origin.name ?? "\"\"")\")")
+            return
+        }
+        let directory = originURL.deletingLastPathComponent()
+        let fm = FileManager.default
+        let files = try? fm.contentsOfDirectory(atPath: directory.path)
+        guard let name = track.name else {
+            print("No name on \(track)")
+            return
+        }
+        if let files {
+            if let file = files.first(where: { $0.contains(name) }) {
+                print(#file, #line, file)
+                let fileURL = directory.appendingPathComponent(file)
+                track.setLocation?(fileURL)
+            } else {
+                print(#file, #line, files)
+            }
+        } else {
+            await MainActor.run {
+                let panel = NSOpenPanel()
+                panel.message = "Find a music file for \(name)"
+                panel.allowedContentTypes = [.mp3]
+                panel.directoryURL = directory
+                panel.allowsMultipleSelection = false
+
+                if case .OK = panel.runModal(),
+                   let url = panel.url {
+                    track.setLocation?(url)
+                }
+            }
+        }
     }
 }
 

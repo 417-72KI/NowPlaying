@@ -20,6 +20,9 @@ protocol MusicDataStore {
 
     func restoreArtwork()
 
+    func restoreURL()
+    func restoreURLForAlbum()
+
     func applySortFromCurrentTrack(forKeyPath keyPath: KeyPath<Track, String>)
 }
 
@@ -56,6 +59,14 @@ extension MusicDataStoreImpl: MusicDataStore {
 
     func restoreArtwork() {
         musicApp.restoreArtworkForCurrentTrack()
+    }
+
+    func restoreURL() {
+        musicApp.restoreURLForCurrentTrack()
+    }
+
+    func restoreURLForAlbum() {
+        Task { await musicApp.restoreURLForAlbumByCurrentTrack() }
     }
 
     func applySortFromCurrentTrack(forKeyPath keyPath: KeyPath<Track, String>) {

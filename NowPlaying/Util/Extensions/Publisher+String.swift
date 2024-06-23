@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 extension Publisher where Output == String? {
-    var orEmpty: AnyPublisher<Self.Output.Wrapped, Self.Failure> {
+    var orEmpty: AnyPublisher<String, Self.Failure> {
         map { $0 ?? "" }
             .eraseToAnyPublisher()
     }

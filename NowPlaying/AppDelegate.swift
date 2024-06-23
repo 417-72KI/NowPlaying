@@ -86,6 +86,10 @@ private extension AppDelegate {
                 musicDataStore.restoreArtwork()
             }
             .store(in: &cancellables)
+
+        currentTrack.map(\.?.fileURL)
+            .sink { print($0 as Any) }
+            .store(in: &cancellables)
     }
 }
 
@@ -135,6 +139,15 @@ private extension AppDelegate {
         default: .off
         }
     }
+
+    @IBAction func restoreURL(_ sender: NSMenuItem) {
+        musicDataStore.restoreURL()
+    }
+
+    @IBAction func restoreURLForAlbum(_ sender: NSMenuItem) {
+        musicDataStore.restoreURLForAlbum()
+    }
+
     // MARK: Sort
     @IBAction func artistSort(_ sender: NSMenuItem) {
         musicDataStore.applySortFromCurrentTrack(forKeyPath: \.artist)
