@@ -22,13 +22,11 @@
 	<string>1</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
-	<key>NSMainStoryboardFile</key>
-	<string>Main</string>
-	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
-	<key>NSAppleEventsUsageDescription</key>
-	<string>再生中のトラックのアートワークをツールバーに表示します</string>
 	<key>LSUIElement</key>
 	<true/>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>再生中のトラックのアートワークをツールバーに表示します</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
 </dict>
 </plist>
