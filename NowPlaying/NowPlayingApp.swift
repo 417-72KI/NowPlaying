@@ -15,7 +15,7 @@ struct NowPlayingApp: App {
 
     var body: some Scene {
         MenuBarExtra {
-            Text("foo")
+            MenuView(currentTrack: $currentTrack)
         } label: {
             Group {
                 if let artwork = currentTrack?.artwork.first?.resize(height: 18) {
