@@ -93,7 +93,7 @@ private extension MusicApp {
 
     func restoreArtwork(for track: MusicTrack) {
         guard let artworks = track.artworks?() else { return }
-        print(artworks.count)
+        // print(artworks.count)
         artworks.lazy
             .compactMap { $0 as? MusicArtwork }
             .forEach { artwork in

@@ -89,3 +89,35 @@ extension MusicDataStoreImpl: MusicDataStore {
         musicApp.autoSortForCurrentTrack()
     }
 }
+
+#if DEBUG
+final class StubMusicDataStore: MusicDataStore {
+    var currentTrack: AnyPublisher<Track?, Never> { Just(nil).eraseToAnyPublisher() }
+    var isPlaying: AnyPublisher<Bool, Never> { Just(true).eraseToAnyPublisher() }
+    var isExecuting: AnyPublisher<Bool, Never> { Just(true).eraseToAnyPublisher() }
+
+    func playPause() {
+    }
+
+    func nextTrack() {
+    }
+
+    func previousTrack() {
+    }
+
+    func restoreArtwork() {
+    }
+
+    func restoreURL() {
+    }
+
+    func restoreURLForAlbum() {
+    }
+
+    func applySortFromCurrentTrack(forKeyPath keyPath: KeyPath<Track, String>) {
+    }
+
+    func autoSortForCurrentTrack() {
+    }
+}
+#endif
