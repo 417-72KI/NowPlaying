@@ -24,6 +24,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet private weak var restoreArtworkMenuItem: NSMenuItem!
     @IBOutlet private weak var autoRestoreArtworkMenuItem: NSMenuItem!
 
+    @IBOutlet private weak var autoSortMenuItem: NSMenuItem!
+
     private let statusItem = NSStatusBar.system
         .statusItem(withLength: NSStatusItem.variableLength)
 
@@ -42,6 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         #if !DEBUG
         restoreArtworkMenuItem.isHidden = true
         autoRestoreArtworkMenuItem.isHidden = true
+        autoSortMenuItem.isHidden = true
         #endif
 
         bind()
@@ -81,9 +84,13 @@ private extension AppDelegate {
         currentTrack.map(\.persistentID, default: "")
             .removeDuplicates()
             .sink { [weak self] _ in
-                guard let self,
-                      case .on = autoRestoreArtworkMenuItem.state else { return }
-                musicDataStore.restoreArtwork()
+                guard let self else { return }
+                if case .on = autoRestoreArtworkMenuItem.state {
+                    musicDataStore.restoreArtwork()
+                }
+                if case .on = autoSortMenuItem.state {
+                    musicDataStore.autoSortForCurrentTrack()
+                }
             }
             .store(in: &cancellables)
 
@@ -152,7 +159,7 @@ private extension AppDelegate {
     @IBAction func artistSort(_ sender: NSMenuItem) {
         musicDataStore.applySortFromCurrentTrack(forKeyPath: \.artist)
     }
-    
+
     @IBAction func albumArtistSort(_ sender: NSMenuItem) {
         musicDataStore.applySortFromCurrentTrack(forKeyPath: \.albumArtist)
     }
@@ -163,6 +170,16 @@ private extension AppDelegate {
 
     @IBAction func composerSort(_ sender: NSMenuItem) {
         musicDataStore.applySortFromCurrentTrack(forKeyPath: \.composer)
+    }
+
+    @IBAction func toggleAutoSortMenu(_ sender: NSMenuItem) {
+        autoSortMenuItem.state = switch autoSortMenuItem.state {
+        case .off: .on
+        default: .off
+        }
+        if case .on = autoSortMenuItem.state {
+            musicDataStore.autoSortForCurrentTrack()
+        }
     }
 
     // MARK: Player
