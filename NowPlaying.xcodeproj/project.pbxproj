@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B99556DB2C2805CC00314063 /* NowPlayingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99556DA2C2805CC00314063 /* NowPlayingApp.swift */; };
+		B99556DD2C28091D00314063 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99556DC2C28091D00314063 /* MenuView.swift */; };
 		B9F2CF4B2583E96100D1D1AD /* UnselectableMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F2CF4A2583E96100D1D1AD /* UnselectableMenuItem.swift */; };
 		B9F2CF502583EC6500D1D1AD /* Applicable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F2CF4F2583EC6500D1D1AD /* Applicable.swift */; };
 		B9F2CF552583EE3500D1D1AD /* NSLayoutConstraint+KeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F2CF542583EE3500D1D1AD /* NSLayoutConstraint+KeyPath.swift */; };
@@ -73,6 +74,7 @@
 
 /* Begin PBXFileReference section */
 		B99556DA2C2805CC00314063 /* NowPlayingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingApp.swift; sourceTree = "<group>"; };
+		B99556DC2C28091D00314063 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		B9F2CF4A2583E96100D1D1AD /* UnselectableMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnselectableMenuItem.swift; sourceTree = "<group>"; };
 		B9F2CF4F2583EC6500D1D1AD /* Applicable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Applicable.swift; sourceTree = "<group>"; };
 		B9F2CF542583EE3500D1D1AD /* NSLayoutConstraint+KeyPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+KeyPath.swift"; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			children = (
 				B99556DA2C2805CC00314063 /* NowPlayingApp.swift */,
 				B9F9F7FD256407F10077795E /* AppDelegate.swift */,
+				B99556DC2C28091D00314063 /* MenuView.swift */,
 				B9F9F83C25640DBE0077795E /* MusicDataStore.swift */,
 				B9F9F7FF256407F10077795E /* ContentView.swift */,
 				B9F2CF5D2583F4EF00D1D1AD /* Util */,
@@ -435,6 +438,7 @@
 				B9F9F800256407F10077795E /* ContentView.swift in Sources */,
 				B9F2CF552583EE3500D1D1AD /* NSLayoutConstraint+KeyPath.swift in Sources */,
 				B9F2CF692583F9CA00D1D1AD /* Publisher+Future.swift in Sources */,
+				B99556DD2C28091D00314063 /* MenuView.swift in Sources */,
 				B9F9F8CC2565A4610077795E /* Publisher+String.swift in Sources */,
 				B9F9F7FE256407F10077795E /* AppDelegate.swift in Sources */,
 				B99556DB2C2805CC00314063 /* NowPlayingApp.swift in Sources */,
