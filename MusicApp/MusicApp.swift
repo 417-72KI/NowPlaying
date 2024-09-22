@@ -35,6 +35,7 @@ public final class MusicApp {
     }
 }
 
+// MARK: Info
 public extension MusicApp {
     var currentTrack: AnyPublisher<Track?, Never> {
         currentTrackSubject.eraseToAnyPublisher()
@@ -45,6 +46,7 @@ public extension MusicApp {
     }
 }
 
+// MARK: Controller
 public extension MusicApp {
     func playPause() {
         app.playpause?()
@@ -59,6 +61,7 @@ public extension MusicApp {
     }
 }
 
+// MARK: Artwork
 public extension MusicApp {
     func restoreArtwork(for track: Track) {
         guard let tracks = app.tracks?() else { return }
@@ -103,6 +106,7 @@ private extension MusicApp {
     }
 }
 
+// MARK: file URL
 public extension MusicApp {
     func restoreURL(for track: Track) {
         guard let tracks = app.tracks?() else { return }
@@ -199,6 +203,54 @@ private extension MusicApp {
     }
 }
 
+public extension MusicApp {
+    func divideFolderWithMultipleDiscsForCurrentTrack() async {
+        guard app.isRunning,
+              let currentTrack = app.currentTrack as? MusicFileTrack else { return }
+        await divideFolderWithMultipleDiscs(forTrack: currentTrack)
+    }
+}
+
+public extension MusicApp {
+    func divideFolderWithMultipleDiscs(forTrack track: MusicFileTrack) async {
+        guard let location = track.location else { preconditionFailure("location is nil") }
+        let fileName = location.lastPathComponent
+        let directory = location.deletingLastPathComponent()
+        guard let match = try! #/^(?<discNumber>[0-9]{1,2})-(?<trackNumber>[0-9]{1,2}) (?<trackName>.*)\.(?<fileExtension>.*)$/#.wholeMatch(in: fileName) else {
+            print("\(location.path()) is not required to divide.")
+            return
+        }
+        guard let discNumber = Int(match.output.discNumber), track.discNumber == discNumber else {
+            print("Disc number in track (\(track.discNumber ?? -1)) does not match with file name: \(fileName)")
+            return
+        }
+        guard let trackNumber = Int(match.output.trackNumber), track.trackNumber == trackNumber else {
+            print("Track number in track (\(track.discNumber ?? -1)) does not match with file name: \(fileName)")
+            return
+        }
+        do {
+            let fm = FileManager.default
+            let discNumberDir = directory.appending(path: "Disc \(discNumber)")
+            if !fm.fileExists(atPath: discNumberDir.path(percentEncoded: false)) {
+                try fm.createDirectory(at: discNumberDir, withIntermediateDirectories: true)
+            }
+            let newLocation = discNumberDir.appending(path: fileName[match.output.trackNumber.startIndex...])
+            try fm.moveItem(at: location, to: newLocation)
+            track.setLocation?(newLocation)
+        } catch let error as CocoaError {
+            switch error.code {
+            case .fileWriteNoPermission:
+                NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles")!)
+            default:
+                print(error)
+            }
+        } catch {
+            print(error)
+        }
+    }
+}
+
+// MARK: Sort
 public extension MusicApp {
     func applySortForArtistFromCurrentTrack() async {
         guard app.isRunning,
