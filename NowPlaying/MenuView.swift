@@ -14,6 +14,7 @@ struct MenuView<DataStore: MusicDataStore>: View {
     @State private var isPlaying = false
     @State private var autoRestoreArtwork = false
     @State private var autoSort = false
+    @State private var autoDivideDisc = false
     @State private var isMenuOpened = false
 
     var body: some View {
@@ -119,11 +120,15 @@ struct MenuView<DataStore: MusicDataStore>: View {
             if autoSort {
                 dataStore.autoSortForCurrentTrack()
             }
+            if autoDivideDisc {
+                dataStore.divideFolderWithMultipleDiscs()
+            }
         }
         .onChange(of: autoSort) {
-            if $1 {
-                dataStore.autoSortForCurrentTrack()
-            }
+            if $1 { dataStore.autoSortForCurrentTrack() }
+        }
+        .onChange(of: autoDivideDisc) {
+            if $1 { dataStore.divideFolderWithMultipleDiscs() }
         }
         .onReceive(dataStore.isPlaying) {
             isPlaying = $0
@@ -157,6 +162,11 @@ private extension MenuView {
                     Button("アルバムのURLを復旧[debug]") {
                         dataStore.restoreURLForAlbum()
                     }
+                    Button("アルバムのディスクごとにフォルダを分割") {
+                        dataStore.divideFolderWithMultipleDiscs()
+                    }
+                    Toggle("自動でディスク分割", isOn: $autoDivideDisc)
+                        .toggleStyle(.switch)
                 }
                 .frame(maxWidth: .infinity)
             }
