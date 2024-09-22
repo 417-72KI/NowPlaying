@@ -14,11 +14,12 @@ struct MenuView<DataStore: MusicDataStore>: View {
     @State private var isPlaying = false
     @State private var autoRestoreArtwork = false
     @State private var autoSort = false
+    @State private var isMenuOpened = false
 
     var body: some View {
-        VStack(spacing: 4) {
+        HStack(alignment: .bottom, spacing: 4) {
             GroupBox {
-                VStack {
+                VStack(spacing: 4) {
                     HStack {
                         if let currentTrack {
                             if let artwork = currentTrack.artwork.first {
@@ -58,7 +59,7 @@ struct MenuView<DataStore: MusicDataStore>: View {
                                 Image(systemName: "backward.fill")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 25, height: 25)
+                                    .frame(width: 25)
                             }
                             Button {
                                 dataStore.playPause()
@@ -89,43 +90,23 @@ struct MenuView<DataStore: MusicDataStore>: View {
                         .frame(height: 25)
                     }
                 }
-            }.padding(8)
-            GroupBox {
-                VStack {
-                    Button("アートワークをコピー") {
-                        guard let artwork = currentTrack?.artwork.first else { return }
-                        artwork.copy(to: .general)
+            }
+            .padding(8)
+            Button {
+                isMenuOpened.toggle()
+            } label: {
+                GroupBox {
+                    ZStack {
+                        Image(systemName: "ellipsis")
+                            .foregroundStyle(Color.primary)
                     }
-                    Button("アートワークを復旧[debug]") {
-                        dataStore.restoreArtwork()
-                    }
-                    Toggle("アートワークを自動で復旧", isOn: $autoRestoreArtwork)
-                        .toggleStyle(.switch)
+                    .frame(width: 15, height: 15)
                 }
             }
-            GroupBox {
-                Button("URLを復旧[debug]") {
-                    dataStore.restoreURL()
-                }
-                Button("アルバムのURLを復旧[debug]") {
-                    dataStore.restoreURLForAlbum()
-                }
-            }
-            GroupBox {
-                Button("アーティスト(読み)を反映") {
-                    dataStore.applySortFromCurrentTrack(forKeyPath: \.artist)
-                }
-                Button("アルバムアーティスト(読み)を反映") {
-                    dataStore.applySortFromCurrentTrack(forKeyPath: \.albumArtist)
-                }
-                Button("アルバム(読み)を反映") {
-                    dataStore.applySortFromCurrentTrack(forKeyPath: \.album)
-                }
-                Button("作曲者(読み)を反映") {
-                    dataStore.applySortFromCurrentTrack(forKeyPath: \.composer)
-                }
-                Toggle("読みを自動反映", isOn: $autoSort)
-                    .toggleStyle(.switch)
+            .buttonStyle(.plain)
+            .padding(.bottom, 8)
+            .popover(isPresented: $isMenuOpened) {
+                popoverMenuView()
             }
         }
         .padding(.vertical, 8)
@@ -146,6 +127,58 @@ struct MenuView<DataStore: MusicDataStore>: View {
         }
         .onReceive(dataStore.isPlaying) {
             isPlaying = $0
+        }
+    }
+}
+
+private extension MenuView {
+    @ViewBuilder
+    func popoverMenuView() -> some View {
+        GroupBox {
+            GroupBox {
+                VStack {
+                    Button("アートワークをコピー") {
+                        guard let artwork = currentTrack?.artwork.first else { return }
+                        artwork.copy(to: .general)
+                    }
+                    Button("アートワークを復旧[debug]") {
+                        dataStore.restoreArtwork()
+                    }
+                    Toggle("アートワークを自動で復旧", isOn: $autoRestoreArtwork)
+                        .toggleStyle(.switch)
+                }
+                .frame(maxWidth: .infinity)
+            }
+            GroupBox {
+                VStack {
+                    Button("URLを復旧[debug]") {
+                        dataStore.restoreURL()
+                    }
+                    Button("アルバムのURLを復旧[debug]") {
+                        dataStore.restoreURLForAlbum()
+                    }
+                }
+                .frame(maxWidth: .infinity)
+            }
+            GroupBox {
+                VStack {
+                    Button("アーティスト(読み)を反映") {
+                        dataStore.applySortFromCurrentTrack(forKeyPath: \.artist)
+                    }
+                    Button("アルバムアーティスト(読み)を反映") {
+                        dataStore.applySortFromCurrentTrack(forKeyPath: \.albumArtist)
+                    }
+                    Button("アルバム(読み)を反映") {
+                        dataStore.applySortFromCurrentTrack(forKeyPath: \.album)
+                    }
+                    Button("作曲者(読み)を反映") {
+                        dataStore.applySortFromCurrentTrack(forKeyPath: \.composer)
+                    }
+                    Toggle("読みを自動反映", isOn: $autoSort)
+                        .toggleStyle(.switch)
+                }
+                .frame(maxWidth: .infinity)
+            }
         }
     }
 }
