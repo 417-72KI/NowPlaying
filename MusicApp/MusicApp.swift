@@ -345,13 +345,17 @@ extension MusicApp {
 }
 
 public extension MusicApp {
+    func autoSort(forTrack track: MusicTrack) {
+        autoSortArtist(forTrack: track)
+        autoSortAlbum(forTrack: track)
+        autoSortAlbumArtist(forTrack: track)
+        autoSortComposer(forTrack: track)
+    }
+
     func autoSortForCurrentTrack() {
         guard app.isRunning,
               let currentTrack = app.currentTrack else { return }
-        autoSortArtist(forTrack: currentTrack)
-        autoSortAlbum(forTrack: currentTrack)
-        autoSortAlbumArtist(forTrack: currentTrack)
-        autoSortComposer(forTrack: currentTrack)
+        autoSort(forTrack: currentTrack)
     }
 }
 

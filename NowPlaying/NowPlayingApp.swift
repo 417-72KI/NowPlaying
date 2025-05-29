@@ -11,12 +11,23 @@ import MusicApp
 @main
 struct NowPlayingApp: App {
     @State private var currentTrack: Track?
+    @State private var isPlaying = false
+    @State private var autoRestoreArtwork = false
+    @State private var autoSort = false
+    @State private var autoDivideDisc = false
+
     private let musicDataStore = MusicDataStoreImpl()
 
     var body: some Scene {
         MenuBarExtra {
-            MenuView(dataStore: musicDataStore,
-                     currentTrack: $currentTrack)
+            MenuView(
+                dataStore: musicDataStore,
+                currentTrack: $currentTrack,
+                isPlaying: $isPlaying,
+                autoRestoreArtwork: $autoRestoreArtwork,
+                autoSort: $autoSort,
+                autoDivideDisc: $autoDivideDisc
+            )
         } label: {
             Group {
                 if let artwork = currentTrack?.artwork.first?.resize(height: 18) {
@@ -29,6 +40,18 @@ struct NowPlayingApp: App {
             }
             .onReceive(musicDataStore.currentTrack) {
                 currentTrack = $0
+                if let currentTrack {
+                    print(currentTrack.title)
+                    if autoRestoreArtwork {
+                        musicDataStore.restoreArtwork()
+                    }
+                    if autoSort {
+                        musicDataStore.autoSortForCurrentTrack()
+                    }
+                    if autoDivideDisc {
+                        musicDataStore.divideFolderWithMultipleDiscs()
+                    }
+                }
             }
         }
         .menuBarExtraStyle(.window)
