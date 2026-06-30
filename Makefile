@@ -14,4 +14,4 @@ run: build
 # 	mint run xcodegen xcodegen generate --use-cache --quiet
 
 build: # xcproj
-	xcrun xcodebuild -configuration Debug build | xcpretty
+	xcrun xcodebuild -configuration Debug build | xcbeautify
