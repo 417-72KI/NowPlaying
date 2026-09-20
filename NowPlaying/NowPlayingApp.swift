@@ -13,7 +13,7 @@ struct NowPlayingApp: App {
     @State private var currentTrack: Track?
     @State private var isPlaying = false
     @State private var autoRestoreArtwork = false
-    @State private var autoSort = false
+    @AppStorage("autoSort") private var autoSort = false
     @State private var autoDivideDisc = false
 
     private let musicDataStore = MusicDataStoreImpl()
