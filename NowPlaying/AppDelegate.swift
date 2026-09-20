@@ -9,7 +9,6 @@ import Cocoa
 import SwiftUI
 import Combine
 
-@NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     // MARK: outlet
