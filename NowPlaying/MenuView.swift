@@ -11,10 +11,10 @@ import MusicApp
 struct MenuView<DataStore: MusicDataStore>: View {
     let dataStore: DataStore
     @Binding var currentTrack: Track?
-    @State private var isPlaying = false
-    @State private var autoRestoreArtwork = false
-    @State private var autoSort = false
-    @State private var autoDivideDisc = false
+    @Binding var isPlaying: Bool
+    @Binding var autoRestoreArtwork: Bool
+    @Binding var autoSort: Bool
+    @Binding var autoDivideDisc: Bool
     @State private var isMenuOpened = false
 
     var body: some View {
@@ -112,18 +112,6 @@ struct MenuView<DataStore: MusicDataStore>: View {
         }
         .padding(.vertical, 8)
         .padding(.horizontal)
-        .onChange(of: currentTrack?.persistentID) {
-            guard let _ = $1 else { return }
-            if autoRestoreArtwork {
-                dataStore.restoreArtwork()
-            }
-            if autoSort {
-                dataStore.autoSortForCurrentTrack()
-            }
-            if autoDivideDisc {
-                dataStore.divideFolderWithMultipleDiscs()
-            }
-        }
         .onChange(of: autoSort) {
             if $1 { dataStore.autoSortForCurrentTrack() }
         }
@@ -196,6 +184,10 @@ private extension MenuView {
 #Preview {
     MenuView(
         dataStore: StubMusicDataStore(),
-        currentTrack: .constant(.mock)
+        currentTrack: .constant(.mock),
+        isPlaying: .constant(false),
+        autoRestoreArtwork: .constant(false),
+        autoSort: .constant(false),
+        autoDivideDisc: .constant(false)
     )
 }
