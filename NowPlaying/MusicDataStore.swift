@@ -23,6 +23,8 @@ protocol MusicDataStore {
     func restoreURL()
     func restoreURLForAlbum()
 
+    func divideFolderWithMultipleDiscs()
+
     func applySortFromCurrentTrack(forKeyPath keyPath: KeyPath<Track, String>)
 
     func autoSortForCurrentTrack()
@@ -59,10 +61,12 @@ extension MusicDataStoreImpl: MusicDataStore {
         musicApp.previousTrack()
     }
 
+    // MARK: Artwork
     func restoreArtwork() {
         musicApp.restoreArtworkForCurrentTrack()
     }
 
+    // MARK: file
     func restoreURL() {
         musicApp.restoreURLForCurrentTrack()
     }
@@ -71,6 +75,11 @@ extension MusicDataStoreImpl: MusicDataStore {
         Task { await musicApp.restoreURLForAlbumByCurrentTrack() }
     }
 
+    func divideFolderWithMultipleDiscs() {
+        Task { await musicApp.divideFolderWithMultipleDiscsForCurrentTrack() }
+    }
+
+    // MARK: Sort
     func applySortFromCurrentTrack(forKeyPath keyPath: KeyPath<Track, String>) {
         Task {
             executingSubject.send(true)
@@ -112,6 +121,9 @@ final class StubMusicDataStore: MusicDataStore {
     }
 
     func restoreURLForAlbum() {
+    }
+
+    func divideFolderWithMultipleDiscs() {
     }
 
     func applySortFromCurrentTrack(forKeyPath keyPath: KeyPath<Track, String>) {
